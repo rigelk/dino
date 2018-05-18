@@ -6,7 +6,7 @@ using Dino.Entities;
 namespace Dino {
 
 public class Database : Qlite.Database {
-    private const int VERSION = 6;
+    private const int VERSION = 7;
 
     public class AccountTable : Table {
         public Column<int> id = new Column.Integer("id") { primary_key = true, auto_increment = true };
@@ -17,7 +17,7 @@ public class Database : Qlite.Database {
         public Column<bool> enabled = new Column.BoolInt("enabled");
         public Column<string> roster_version = new Column.Text("roster_version") { min_version=2 };
         public Column<long> mam_earliest_synced = new Column.Long("mam_earliest_synced") { min_version=4 };
-        public Column<string> certificate = new Column.Text("certificate");
+        public Column<string> certificate = new Column.Text("certificate") { min_version=7 };
 
         internal AccountTable(Database db) {
             base(db, "account");
